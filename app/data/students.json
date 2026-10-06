@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "mssv": "SV001",
+    "ho_ten": "Nguyen Van A",
+    "lop": "CNTT1",
+    "diem": 8
+  },
+  {
+    "id": 2,
+    "mssv": "SV002",
+    "ho_ten": "Nguyen Van B",
+    "lop": "CNTT1",
+    "diem": 7.5
+  },
+  {
+    "id": 3,
+    "mssv": "SV003",
+    "ho_ten": "Nguyen Van C",
+    "lop": "CNTT2",
+    "diem": 9
+  },
+  {
+    "id": 4,
+    "mssv": "SV004",
+    "ho_ten": "Nguyen Van D",
+    "lop": "CNTT2",
+    "diem": 6.5
+  },
+  {
+    "id": 5,
+    "mssv": "SV005",
+    "ho_ten": "Nguyen Van E",
+    "lop": "CNTT1",
+    "diem": 8.5
+  },
+  {
+    "mssv": "SV006",
+    "ho_ten": "Nguyen Van F",
+    "lop": "CNTT1",
+    "diem": 8.5,
+    "id": 6
+  }
+]
