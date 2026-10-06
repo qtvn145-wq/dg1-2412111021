@@ -1,0 +1,43 @@
+dell@dell:~$ curl -i -X POST http://localhost:5000/api/students \
+-H "Content-Type: application/json" \
+-d '{"mssv":"SV006","ho_ten":"Nguyen Van F","lop":"CNTT1","diem":8.5}'
+HTTP/1.1 201 CREATED
+Server: Werkzeug/3.1.5 Python/3.14.4
+Date: Tue, 06 Oct 2026 13:41:25 GMT
+Content-Type: application/json
+Content-Length: 73
+Connection: close
+
+{"diem":8.5,"ho_ten":"Nguyen Van F","id":6,"lop":"CNTT1","mssv":"SV006"}
+dell@dell:~$ curl -i -X POST http://localhost:5000/api/students \
+-H "Content-Type: application/json" \
+-d '{"mssv":"SV007","ho_ten":"Nguyen Van G","lop":"CNTT1"}'
+HTTP/1.1 400 BAD REQUEST
+Server: Werkzeug/3.1.5 Python/3.14.4
+Date: Tue, 06 Oct 2026 13:42:30 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: close
+
+{"error":"missing field: diem"}
+dell@dell:~$ curl -i -X POST http://localhost:5000/api/students \
+-H "Content-Type: application/json" \
+-d '{"mssv":"SV008","ho_ten":"Nguyen Van H","lop":"CNTT1","diem":11}'
+HTTP/1.1 400 BAD REQUEST
+Server: Werkzeug/3.1.5 Python/3.14.4
+Date: Tue, 06 Oct 2026 13:42:41 GMT
+Content-Type: application/json
+Content-Length: 26
+Connection: close
+
+{"error":"invalid score"}
+dell@dell:~$ curl -i -X POST http://localhost:5000/api/students \
+-H "Content-Type: application/json" \
+-d '{"mssv":"SV008","ho_ten":"Nguyen Van H","lop":"CNTT1","diem":11}'
+HTTP/1.1 400 BAD REQUEST
+Server: Werkzeug/3.1.5 Python/3.14.4
+Date: Tue, 06 Oct 2026 13:42:46 GMT
+Content-Type: application/json
+Content-Length: 26
+Connection: close
+
