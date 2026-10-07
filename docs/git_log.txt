@@ -1,0 +1,17 @@
+*   db0f719 fix: resolve README merge conflict
+|\  
+| * 8b8f4a6 docs: update README on develop
+* | 21216d8 docs: update README on main
+| | * 90832a9 Sửa docker-compose
+| | * 765c071 Cập nhật ứng dụng
+| | * 8697303 docs: add Docker test results
+| | * a1d1d21 feat: add Docker Compose and nginx
+| | * 12adee2 feat: add Docker configuration
+| |/  
+| * 9cf575d Merge pull request #1 from qtvn145-wq/feature/web-app
+|/| 
+| * 23fc2b3 feat: add student REST API
+| * 8879034 feat: add student list interface
+| * 715b09f feat: add Flask web application
+|/  
+* 3af5d02 chore: init project
