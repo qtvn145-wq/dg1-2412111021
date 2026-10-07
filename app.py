@@ -2,19 +2,36 @@ from flask import Flask, jsonify, request, render_template
 import json
 import os
 
-app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'app', 'templates'))
 
-DATA_FILE = "/home/dell/dg1_2412111021/app/data/students.json"
+# Chỉ khởi tạo app 1 lần duy nhất
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, 'app', 'templates'),
+    static_folder=os.path.join(BASE_DIR, 'app', 'static')
+)
+
+# Sử dụng đường dẫn tương đối để chạy chuẩn cả ở máy thật lẫn Docker container
+DATA_FILE = os.path.join(BASE_DIR, 'app', 'data', 'students.json')
 
 
 def load_students():
+    # Kiểm tra nếu chưa có file hoặc thư mục thì tự động tạo file rỗng
+    if not os.path.exists(DATA_FILE):
+        os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
+        with open(DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        return []
+
     with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []
 
 
 def save_students(data):
+    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
@@ -37,18 +54,17 @@ def index():
 def health():
     return jsonify({
         "status": "ok",
-        "student": os.getenv("MSSV", "UNKNOWN")
+        "student": os.getenv("MSSV", "2412111021")
     })
 
 
 @app.route("/api/students")
 def students():
     data = load_students()
-
     lop = request.args.get("lop")
 
     if lop:
-        data = [s for s in data if s["lop"] == lop]
+        data = [s for s in data if str(s.get("lop")) == str(lop)]
 
     return jsonify(data)
 
@@ -58,7 +74,7 @@ def student(id):
     data = load_students()
 
     for s in data:
-        if s["id"] == id:
+        if s.get("id") == id:
             return jsonify(s)
 
     return jsonify({
@@ -72,7 +88,6 @@ def student(id):
 
 @app.route("/api/students", methods=["POST"])
 def add_student():
-
     body = request.get_json(silent=True)
 
     # Không có JSON
@@ -109,11 +124,11 @@ def add_student():
         }), 400
 
     # Đọc danh sách sinh viên
-    students = load_students()
+    students_list = load_students()
 
     # Tạo ID tự động
-    if students:
-        new_id = max(s["id"] for s in students) + 1
+    if students_list:
+        new_id = max(s.get("id", 0) for s in students_list) + 1
     else:
         new_id = 1
 
@@ -121,10 +136,10 @@ def add_student():
     body["diem"] = diem
 
     # Thêm sinh viên
-    students.append(body)
+    students_list.append(body)
 
     # Lưu file JSON
-    save_students(students)
+    save_students(students_list)
 
     # HTTP 201
     return jsonify(body), 201
@@ -136,7 +151,6 @@ def add_student():
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
-
     app.run(
         host="0.0.0.0",
         port=port
