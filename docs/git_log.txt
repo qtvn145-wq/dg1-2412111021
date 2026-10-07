@@ -1,9 +1,23 @@
-*   db0f719 fix: resolve README merge conflict
+* b263693 docs: add git history
+* 83f0bde docs: update README on develop
+* 9393570 docs: update README on main
+*   0072e4d Merge pull request #4 from qtvn145-wq/develop
 |\  
-| * 8b8f4a6 docs: update README on develop
-* | 21216d8 docs: update README on main
-| | * 90832a9 Sửa docker-compose
-| | * 765c071 Cập nhật ứng dụng
+| | * a672f2c docs: update README on develop
+| |/  
+| *   5cbbd22 Merge pull request #2 from qtvn145-wq/feature/docker
+| |\  
+| | | *   db0f719 fix: resolve README merge conflict
+| | | |\  
+| | | | * 8b8f4a6 docs: update README on develop
+| | |_|/  
+| |/| |   
+| | | * 21216d8 docs: update README on main
+| |_|/  
+|/| |   
+| | | * 90832a9 Sửa docker-compose
+| | | * 765c071 Cập nhật ứng dụng
+| | |/  
 | | * 8697303 docs: add Docker test results
 | | * a1d1d21 feat: add Docker Compose and nginx
 | | * 12adee2 feat: add Docker configuration
