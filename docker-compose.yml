@@ -4,7 +4,7 @@ services:
   web:
     build: .
     volumes:
-      - ./app/data:/app/app/data
+      - .:/app
 
   nginx:
     image: nginx:alpine
